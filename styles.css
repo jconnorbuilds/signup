@@ -4,11 +4,12 @@
   box-sizing: border-box;
   /* --light-text: #E2FBFF; */
   --cta-color: #5DB83D;
+  --cta-color-light: #d8ecd0;
   --primary: rgb(245, 242, 236);
-  --primary-transl: rgba(255, 255, 255, 0.4);
+  --translucent-layer: rgba(255, 255, 255, 0.4);
   --dark-text: #231B0C;
   --secondary: #ddd5ce44;
-  --border-color: #7B8C91;
+  --border-color: #CCC;
 }
 
 html {
@@ -100,7 +101,7 @@ label {
 }
 
 .main-content {
-  background-color: var(--primary-transl);
+  background-color: var(--translucent-layer);
   border-radius: 0px 30px 30px 0;
   display: flex;
   flex-direction: column;
@@ -125,50 +126,73 @@ form {
   max-width: 600px;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  appearance: none;
-  font-size: inherit;
-  color: inherit;
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
-  line-height: 1.6rem;
-  width: 200px;
-  padding: 0 6px;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+input {
   appearance: none;
   font: inherit;
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-color);
   border-radius: 5px;
   line-height: 1.6rem;
   width: 200px;
   padding: 0 6px;
 }
 
-input:hover {
-  border-color: var(--cta-color);
+input:hover:not(:focus) {
+  border-color: #AAA;
   background-color: var(--primary);
 }
 
 input:focus {
   outline: none;
-  border-color: var(--cta-color);
-  box-shadow: 0 0 1.5px var(--cta-color);
-  background-color: var(--primary);
+  background-color: #FFF;
 }
 
-
-form p {
-
+::placeholder {
+  color: #BBB;
 }
 
-.cta {
-  /* flex: 1; */
+/* Validation styling */
+input:valid:not(:placeholder-shown, #pword-confirm),
+input[type="password"]:valid.valid {
+  border-color: green;
+}
+input:valid:not(:focus, [type="password"], [type="tel"]),
+input[type="password"]:valid.valid,
+input[type="tel"]:valid {
+  background-color: var(--cta-color-light);
+  transition: all 1s;
+}
+input:invalid:not(:placeholder-shown, [type="password"], [type="tel"]),
+input[type="password"].invalid,
+input[type="tel"]:invalid:not(:placeholder-shown, :focus) {
+  border-color: #fe2c2c;
+}
+
+input + span {
+  display: flex;
+  position: absolute;
+}
+
+span::after {
+  font-size: 0.8rem;
+  color: #fe2c2c;
+}
+
+:is(#fname, #lname):invalid:not(:placeholder-shown) + span::after {
+  content: "Must be between 1-30 chars, no numbers";
+}
+#phone-num:invalid:not(:focus, :placeholder-shown) + span::after {
+  content: "Enter a 10-digit US phone number"
+}
+#pword:invalid:not(:placeholder-shown).short + span::after {
+  content: "Must be at least 8 characters";
+}
+#pword-confirm:not(:placeholder-shown).invalid + span::after {
+  content: "Passwords must match"
+}
+
+form p span {
+  color: #fe2c2c;
+  font-size: 0.5rem;
 }
 
 .cta button {
@@ -178,7 +202,6 @@ form p {
   border: none;
   padding: 8px 30px;
   border-radius: 8px;
-
 }
 
 

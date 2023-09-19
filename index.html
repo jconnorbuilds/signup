@@ -29,33 +29,33 @@
         <h1>Enter your information.</h1>
         <form>
           <p>
-            <label for="">First Name</label>
-            <input type="text">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" pattern="^[^0-9]+$" maxlength="30" placeholder="Taro" required>
             <span></span>
           </p>
           <p>
-            <label for="">Last Name</label>
-            <input type="text">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" pattern="^[^0-9]+$" maxlength="30" placeholder="Smith" required>
             <span></span>
           </p>
           <p>
-            <label for="">Email</label>
-            <input type="text">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" maxlength="200" placeholder="example@mosstec.com" required>
             <span></span>
           </p>
           <p>
-            <label for="">Phone Number</label>
-            <input type="text">
+            <label for="phone-num">Phone Number</label>
+            <input type="tel" id="phone-num" placeholder="(999)555-8989" pattern="^\D*(\d\D*){10}$" name="phone" required>
             <span></span>
           </p>
           <p>
-            <label for="">Password</label>
-            <input type="text">
+            <label for="pword">Password</label>
+            <input type="password" id="pword" id="password" placeholder="Create a password" minlength="8" maxlength="200" required>
             <span></span>
           </p>
           <p>
-            <label for="">Confirm Password</label>
-            <input type="text">
+            <label for="pword-confirm">Confirm Password</label>
+            <input type="password" id="pword-confirm" minlength="8" maxlength="200" required>
             <span></span>
           </p>
         </form>
@@ -69,4 +69,40 @@
     </div>
   </div>
 </body>
+<script>
+  const userPhoneNum = document.querySelector('#phone-num')
+  const userPw = document.querySelector('#pword');
+  const userPwConfirm = document.querySelector('#pword-confirm');
+
+  function validatePw() {
+    const isPasswordValid = userPw.value.length >= 8;
+    const doPasswordsMatch = userPw.value === userPwConfirm.value;
+
+    if (userPwConfirm.value) {
+      userPwConfirm.classList.toggle("valid", doPasswordsMatch && isPasswordValid);
+      userPwConfirm.classList.toggle("invalid", !doPasswordsMatch || !isPasswordValid);
+      userPw.classList.toggle("valid", doPasswordsMatch && isPasswordValid);
+      userPw.classList.toggle("invalid", !doPasswordsMatch || !isPasswordValid);
+    } else {
+      userPw.classList.remove("valid");
+      userPw.classList.remove("invalid");
+    }
+  }
+
+  function checkLength() {
+    this.value.length >= 8 ? this.classList.remove("short") : this.classList.add("short");
+  }
+  
+  userPhoneNum.addEventListener('input', e => {
+      var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+      e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+  });
+
+  userPwConfirm.addEventListener('input', validatePw);
+  userPw.addEventListener('input', validatePw);
+  userPw.addEventListener('input', checkLength);
+
+
+
+</script>
 </html>
