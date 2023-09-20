@@ -53,6 +53,10 @@ body {
   align-items: center;
 }
 
+button {
+  cursor: pointer;
+}
+
 label {
   display: block;
   font-size: 0.8rem;
@@ -85,7 +89,6 @@ label {
 }
 
 .container {
-  /* height: 75%; */
   width: 100%;
   margin: 30px;
   display: grid;
@@ -162,6 +165,7 @@ input[type="tel"]:valid {
   transition: all 1s;
 }
 input:invalid:not(:placeholder-shown, [type="password"], [type="tel"]),
+input[type="password"].short,
 input[type="password"].invalid,
 input[type="tel"]:invalid:not(:placeholder-shown, :focus) {
   border-color: #fe2c2c;
@@ -178,7 +182,7 @@ span::after {
 }
 
 :is(#fname, #lname):invalid:not(:placeholder-shown) + span::after {
-  content: "Must be between 1-30 chars, no numbers";
+  content: "Must be less than 30 chars, no numbers";
 }
 #phone-num:invalid:not(:focus, :placeholder-shown) + span::after {
   content: "Enter a 10-digit US phone number"

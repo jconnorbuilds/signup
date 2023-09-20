@@ -27,7 +27,7 @@
       <!-- form section -->
       <div class="form-container">
         <h1>Enter your information.</h1>
-        <form>
+        <form id="signup-form">
           <p>
             <label for="fname">First Name</label>
             <input type="text" id="fname" name="fname" pattern="^[^0-9]+$" maxlength="30" placeholder="Taro" required>
@@ -61,7 +61,7 @@
         </form>
       </div>
       <div class="cta">
-        <button type="submit"><strong>Create Account</strong></button>
+        <button type="submit" form="signup-form"><strong>Create Account</strong></button>
         <p>
           Already have an account? <a href="#"><strong>Log in</strong></a>
         </p>
@@ -73,6 +73,8 @@
   const userPhoneNum = document.querySelector('#phone-num')
   const userPw = document.querySelector('#pword');
   const userPwConfirm = document.querySelector('#pword-confirm');
+  const submitBtn = document.querySelector('button[type="submit"]');
+  
 
   function validatePw() {
     const isPasswordValid = userPw.value.length >= 8;
@@ -101,8 +103,6 @@
   userPwConfirm.addEventListener('input', validatePw);
   userPw.addEventListener('input', validatePw);
   userPw.addEventListener('input', checkLength);
-
-
 
 </script>
 </html>
