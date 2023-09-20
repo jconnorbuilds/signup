@@ -1,4 +1,4 @@
 # signup
 A signup / landing page for MossTec, a fictional service, showing off basic form validation UI/UX. 
 
-View the live preview here -> https://jconnorbuilds.github.io/signup/
+View the live preview here -> [link]()https://jconnorbuilds.github.io/signup/)
